@@ -12,11 +12,12 @@ import RealmSwift
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var searchTextField: UITextField!
     // Realmインスタンスし取得
     let realm = try! Realm()
     
     // DB内のタスクが格納されるリスト
+    // 日付昇順でソート
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
     
     override func viewDidLoad() {
@@ -24,6 +25,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    // 検索ボタン押下
+    @IBAction func searchAction(_ sender: Any) {
+        
     }
     
     // segueで画面遷移する際に呼ばれる
@@ -69,7 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         
         let dateString:String = formatter.string(from: task.date)
-        cell.detailTextLabel?.text = dateString
+        cell.detailTextLabel?.text = dateString + "  (" + task.category + ")"
         
         return cell
     }
