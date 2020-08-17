@@ -12,7 +12,6 @@ import RealmSwift
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchTextField: UITextField!
     // Realmインスタンスし取得
     let realm = try! Realm()
     
@@ -25,11 +24,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    // 検索ボタン押下
-    @IBAction func searchAction(_ sender: Any) {
-        
     }
     
     // segueで画面遷移する際に呼ばれる
