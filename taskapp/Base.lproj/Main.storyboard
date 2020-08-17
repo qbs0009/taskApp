@@ -16,11 +16,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ft8-dR-mry">
-                                <rect key="frame" x="0.0" y="144" width="414" height="752"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="カテゴリ検索" id="2db-Tr-bPn">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="ljK-Pq-EV4" detailTextLabel="Xal-LH-CWg" style="IBUITableViewCellStyleSubtitle" id="Tec-AY-4Fe">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                        <rect key="frame" x="0.0" y="84" width="414" height="55.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tec-AY-4Fe" id="rvX-cV-myk">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
@@ -45,20 +50,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="カテゴリ検索" translatesAutoresizingMaskIntoConstraints="NO" id="2db-Tr-bPn">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Ft8-dR-mry" firstAttribute="top" secondItem="2db-Tr-bPn" secondAttribute="bottom" id="3WD-tG-bqP"/>
                             <constraint firstAttribute="bottom" secondItem="Ft8-dR-mry" secondAttribute="bottom" id="BgF-Cn-9OU"/>
-                            <constraint firstItem="2db-Tr-bPn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="FpR-TG-CIw"/>
+                            <constraint firstItem="Ft8-dR-mry" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Cmw-vS-d73"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ft8-dR-mry" secondAttribute="trailing" id="Ufm-5s-fpn"/>
                             <constraint firstItem="Ft8-dR-mry" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iXU-PC-jF4"/>
-                            <constraint firstItem="2db-Tr-bPn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="oIJ-AC-I1U"/>
-                            <constraint firstItem="2db-Tr-bPn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zl6-Yr-CyO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -70,6 +68,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="2db-Tr-bPn" id="fMd-Lu-RR9"/>
                         <outlet property="tableView" destination="Ft8-dR-mry" id="v0f-g5-H1t"/>
                         <segue destination="kIN-Q4-WgN" kind="show" identifier="cellSegue" id="qZU-FA-h1p"/>
                     </connections>

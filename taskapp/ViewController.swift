@@ -9,9 +9,11 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+
     // Realmインスタンスし取得
     let realm = try! Realm()
     
@@ -22,6 +24,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -61,15 +64,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 再利用可能なCellを取得
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        // Cellに値を格納
+        // Cellにタイトルに値を格納
         let task = taskArray[indexPath.row]
         cell.textLabel?.text = task.title
         
+        // 日付をString型に置換
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
         let dateString:String = formatter.string(from: task.date)
-        cell.detailTextLabel?.text = dateString + "  (" + task.category + ")"
+        
+        // cellの詳細に値を格納
+        cell.detailTextLabel?.text = dateString + "\n" + task.category
+        
+        cell.detailTextLabel?.numberOfLines=0
         
         return cell
     }
@@ -109,6 +116,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         }
+    }
+    
+    // seachBarに値が入った時
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            // DB内のタスクが格納されるリスト
+            // 日付昇順でソート
+            taskArray = realm.objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+        } else {
+            print(searchText)
+            
+            taskArray = realm.objects(Task.self).filter("category CONTAINS %@", searchText).sorted(byKeyPath: "date", ascending: true)
+        }
+        tableView.reloadData()
     }
 }
 
